@@ -1,0 +1,121 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform var(--transition-normal);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card.highlight {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.15);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.bg-red { background-color: var(--danger); }
+.bg-green { background-color: var(--brand-primary); }
+.bg-blue { background-color: var(--brand-secondary); }
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.stat-unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.recent-trips {
+  padding: 1.5rem;
+}
+
+.trip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trip-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+}
+
+.trip-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trip-details {
+  flex: 1;
+}
+
+.trip-route {
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.trip-meta {
+  font-size: 0.875rem;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.trip-emissions {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.text-danger { color: var(--danger); }
+.text-success { color: var(--brand-primary); }
+.py-lg { padding-top: 3rem; padding-bottom: 3rem; }
+.text-center { text-align: center; }

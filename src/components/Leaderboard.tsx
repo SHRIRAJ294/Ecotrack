@@ -1,10 +1,7 @@
+import type React from 'react';
 import type { UserStats, LeaderboardUser } from '../types';
 import { Trophy, Medal, Award } from 'lucide-react';
 import './Leaderboard.css';
-
-interface LeaderboardProps {
-  userStats: UserStats;
-}
 
 const MOCK_FRIENDS: Omit<LeaderboardUser, 'rank'>[] = [
   { id: '1', name: 'Alex Johnson', co2Saved: 124.5 },
@@ -13,7 +10,14 @@ const MOCK_FRIENDS: Omit<LeaderboardUser, 'rank'>[] = [
   { id: '4', name: 'Emma Wilson', co2Saved: 45.3 },
 ];
 
-export const Leaderboard = ({ userStats }: LeaderboardProps) => {
+/**
+ * Leaderboard Component
+ * Ranks users based on their CO2 savings to gamify the experience.
+ * @param {Object} props - Component props
+ * @param {UserStats} props.userStats - The current user's statistics
+ * @returns {React.ReactElement} The rendered leaderboard
+ */
+export const Leaderboard: React.FC<{ userStats: UserStats }> = ({ userStats }) => {
   // Combine user with friends and sort to determine rank
   const allUsers: Omit<LeaderboardUser, 'rank'>[] = [
     ...MOCK_FRIENDS,

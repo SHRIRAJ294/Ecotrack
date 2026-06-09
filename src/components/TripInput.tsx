@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import type React from 'react';
 import type { TransportMode, Trip } from '../types';
 import { Car, Bus, Train, Bike, Footprints, ArrowRight, Zap } from 'lucide-react';
 import { getGreenerAlternatives, calculateEmissions } from '../utils/emissions';
 import './TripInput.css';
 
-interface TripInputProps {
-  onAddTrip: (trip: Omit<Trip, 'id' | 'co2Emitted'>) => void;
-}
-
+/**
+ * TripInput Component
+ * Allows users to log their trips and provides greener alternatives.
+ * @param {Object} props - Component props
+ * @param {Function} props.onAddTrip - Callback when a trip is added
+ * @returns {React.ReactElement} The rendered form
+ */
 const MODES: { value: TransportMode; label: string; icon: React.ReactNode }[] = [
   { value: 'car', label: 'Car', icon: <Car size={20} /> },
   { value: 'bus', label: 'Bus', icon: <Bus size={20} /> },
@@ -16,7 +20,7 @@ const MODES: { value: TransportMode; label: string; icon: React.ReactNode }[] = 
   { value: 'walking', label: 'Walking', icon: <Footprints size={20} /> },
 ];
 
-export const TripInput = ({ onAddTrip }: TripInputProps) => {
+export const TripInput: React.FC<{ onAddTrip: (trip: Omit<Trip, 'id' | 'co2Emitted'>) => void }> = ({ onAddTrip }) => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [distanceKm, setDistanceKm] = useState<number | ''>('');
@@ -52,32 +56,37 @@ export const TripInput = ({ onAddTrip }: TripInputProps) => {
         <form onSubmit={handleSubmit} className="trip-form">
           <div className="form-group row">
             <div className="input-wrapper">
-              <label>Origin</label>
+              <label htmlFor="origin-input">Origin</label>
               <input 
+                id="origin-input"
                 type="text" 
                 className="input-field" 
                 placeholder="e.g. Home"
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
                 required
+                aria-required="true"
               />
             </div>
             <div className="input-wrapper">
-              <label>Destination</label>
+              <label htmlFor="destination-input">Destination</label>
               <input 
+                id="destination-input"
                 type="text" 
                 className="input-field" 
                 placeholder="e.g. Office"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 required
+                aria-required="true"
               />
             </div>
           </div>
 
           <div className="form-group mb-lg">
-            <label>Distance (km)</label>
+            <label htmlFor="distance-input">Distance (km)</label>
             <input 
+              id="distance-input"
               type="number" 
               className="input-field" 
               placeholder="e.g. 5.2"
@@ -86,6 +95,7 @@ export const TripInput = ({ onAddTrip }: TripInputProps) => {
               value={distanceKm}
               onChange={(e) => setDistanceKm(e.target.value ? Number(e.target.value) : '')}
               required
+              aria-required="true"
             />
           </div>
 

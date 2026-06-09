@@ -38,4 +38,13 @@ describe('Emissions Engine', () => {
     const alternatives = getGreenerAlternatives('walking');
     expect(alternatives.length).toBe(0);
   });
+
+  it('handles extremely large distances correctly', () => {
+    // 10000 km * 0.192
+    expect(calculateEmissions(10000, 'car')).toBeCloseTo(1920);
+  });
+
+  it('handles negative distances gracefully by returning 0', () => {
+    expect(calculateEmissions(-50, 'car')).toBe(0);
+  });
 });

@@ -1,12 +1,16 @@
+import type React from 'react';
 import type { UserStats } from '../types';
 import { Leaf, Car, Activity, Map } from 'lucide-react';
 import './Dashboard.css';
 
-interface DashboardProps {
-  stats: UserStats;
-}
-
-export const Dashboard = ({ stats }: DashboardProps) => {
+/**
+ * Dashboard Component
+ * Displays a high-level overview of the user's carbon footprint.
+ * @param {Object} props - Component props
+ * @param {UserStats} props.stats - The aggregated statistics for the user
+ * @returns {React.ReactElement} The rendered dashboard
+ */
+export const Dashboard: React.FC<{ stats: UserStats }> = ({ stats }) => {
   return (
     <div className="dashboard animate-fade-in">
       <div className="dashboard-header mb-lg">

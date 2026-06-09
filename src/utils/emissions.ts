@@ -1,7 +1,11 @@
 import type { TransportMode } from '../types';
 
-// Emission factors in kg CO2 per passenger-kilometer
-// Approximate values based on typical averages
+/**
+ * Emission factors in kg CO2 per passenger-kilometer.
+ * Approximate values based on typical averages.
+ * @constant
+ * @type {Record<TransportMode, number>}
+ */
 export const EMISSION_FACTORS: Record<TransportMode, number> = {
   car: 0.192,     // Average petrol/diesel car
   bus: 0.105,     // Average local bus
@@ -17,14 +21,15 @@ export const EMISSION_FACTORS: Record<TransportMode, number> = {
  * @returns CO2 emitted in kg
  */
 export const calculateEmissions = (distanceKm: number, mode: TransportMode): number => {
+  if (distanceKm < 0) return 0;
   return distanceKm * EMISSION_FACTORS[mode];
 };
 
 /**
  * Calculates potential CO2 saved compared to driving a car.
- * @param distanceKm Distance in kilometers
- * @param actualMode Transport mode used
- * @returns CO2 saved in kg
+ * @param {number} distanceKm - Distance in kilometers
+ * @param {TransportMode} actualMode - Transport mode used
+ * @returns {number} CO2 saved in kg
  */
 export const calculateSavings = (distanceKm: number, actualMode: TransportMode): number => {
   if (actualMode === 'car') return 0;
@@ -37,6 +42,8 @@ export const calculateSavings = (distanceKm: number, actualMode: TransportMode):
 
 /**
  * Suggests greener alternatives based on the selected mode.
+ * @param {TransportMode} currentMode - The currently selected transport mode
+ * @returns {TransportMode[]} Array of alternative transport modes that emit less CO2
  */
 export const getGreenerAlternatives = (currentMode: TransportMode): TransportMode[] => {
   const currentFactor = EMISSION_FACTORS[currentMode];
